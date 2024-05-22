@@ -50,7 +50,7 @@ This React.js application provides a user-friendly and responsive Home Hunts pro
 
 1. Clone this repository:
 
-    `git clone `
+    `git clone https://github.com/NeelimaAitha/Furrl-main.git`
 
 2. Install dependencies:
 
