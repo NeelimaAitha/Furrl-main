@@ -67,6 +67,11 @@ This React.js application provides a user-friendly and responsive Home Hunts pro
 2. Open [localhost](http://localhost:3000) in your web browser.
 
 ## Hosted Url:
+Netlify
+https://main--neelimafurrl.netlify.app/
+
+Vercel
+https://vercel.com/aitha-neelimas-projects/furrl-main/JB7j1ASVXHrfehdwYi458T9tss1a
 
 
 
