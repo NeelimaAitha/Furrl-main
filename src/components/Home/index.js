@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import "./index.css";
 import Navbar from "../Navbar";
 import CategoryFilters from "../CategoryFilters";
@@ -26,7 +26,7 @@ const Home = () => {
     updateReached(false);
   };
 
-  const getProducts = async () => {
+  const getProducts = useCallback(async () => {
     if (products.page < products.totalPages) {
       updateLoading(true);
 
@@ -58,20 +58,19 @@ const Home = () => {
 
       if (response.ok) {
         const data = await response.json();
-        updateProducts({
+        updateProducts((prevProducts) => ({
           ...data["data"]["getListingProducts"],
           products: [
-            ...products["products"],
-            ...data["data"]["getListingProducts"]["products"],
+            ...prevProducts.products,
+            ...data["data"]["getListingProducts"].products,
           ],
-        });
-
+        }));
         updateReached(false);
       }
 
       updateLoading(false);
     }
-  };
+  }, [products.page, products.totalPages, activeFilter]);
 
   const getFilters = async () => {
     const url = "https://api.furrl.in/api/v2/listing/getListingFilters";
@@ -105,29 +104,32 @@ const Home = () => {
   };
 
   useEffect(() => {
-    reachedEnd && getProducts();
-  }, [reachedEnd]);
+    if (reachedEnd) {
+      getProducts();
+    }
+  }, [reachedEnd, getProducts]);
 
   useEffect(() => {
     getProducts();
-  }, [activeFilter]);
+  }, [activeFilter, getProducts]);
 
   useEffect(() => {
     getFilters();
   }, []);
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
+    const handleScroll = () => {
       if (
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 80
       ) {
         !reachedEnd && updateReached(true);
       }
-    });
+    };
 
-    return window.removeEventListener("scroll", () => {});
-  }, []);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [reachedEnd]);
 
   return (
     <>
