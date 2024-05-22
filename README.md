@@ -50,7 +50,7 @@ This React.js application provides a user-friendly and responsive Home Hunts pro
 
 1. Clone this repository:
 
-    `git clone https://github.com/rathan1234/Furrl.git`
+    `git clone `
 
 2. Install dependencies:
 
@@ -68,6 +68,5 @@ This React.js application provides a user-friendly and responsive Home Hunts pro
 
 ## Hosted Url:
 
-[Furrl](https://rathanfurrl.netlify.app/)
 
-https://rathanfurrl.netlify.app
+
